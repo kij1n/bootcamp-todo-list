@@ -5,7 +5,7 @@ import {useState} from 'react'
 import './App.css'
 
 function App() {
-    const [taskData] = useState(() => {
+    const [taskData, setTaskData] = useState(() => {
         const dataStr = localStorage['taskData']
         if (!dataStr) {
             return {}
@@ -31,7 +31,7 @@ function App() {
     return (
         <>
             <TodoHeader listName={listName}/>
-            <TodoInput listName={listName}/>
+            <TodoInput listName={listName} setTaskData={setTaskData}/>
             <TodoList listName={listName} tasks={currentTasks()}/>
         </>
     )

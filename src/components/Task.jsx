@@ -1,7 +1,7 @@
 export const Task = (props) => {
     return (
         <>
-            <li>{props.text}</li>
+            <li>{props.task}</li>
         </>
     )
 }

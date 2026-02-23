@@ -49,6 +49,7 @@ function TodoInput(props) {
             localStorage.setItem("taskData",
                 JSON.stringify(newData)
             )
+            props.setTaskData(newData)
             setValue("")
         }
     }
