@@ -2,25 +2,13 @@ import {useState} from "react";
 
 function TodoInput(props) {
     const listName = props.listName
-    const taskData = (() => {
-        const taskDataStr = localStorage.getItem('taskData')
-        localStorage.getItem("taskData")
-        try {
-            const data = JSON.parse(taskDataStr)
-            return data ? data : {}
-        } catch (error) {
-            console.error(error)
-            return {}
-        }
-    })
+    const taskData = props.taskData
 
     const newTaskID = (() => {
-        const allTasks = Object.values(taskData()).flat()
-        console.log(allTasks)
+        const allTasks = Object.values(taskData).flat()
         const ids = allTasks.map(t =>
             (typeof t.id === 'number') ? t.id : -1
         )
-        console.log(ids)
         return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0
     })
 
@@ -30,17 +18,22 @@ function TodoInput(props) {
         if (event.key === 'Enter' && value !== '') {
             const newData = (() => {
                 try {
-                    const clone = structuredClone(taskData())
-                    if (clone[listName].length === 0) {
-                        clone[listName] = {value: value, id: newTaskID()}
+                    const clone = structuredClone(taskData)
+                    if (
+                        Array.isArray(clone[listName]) &&
+                        clone[listName].length === 0
+                    ) {
+                        clone[listName] = [{value: value, id: newTaskID()}]
                     } else {
                         clone[listName] = [...clone[listName], {value: value, id: newTaskID()}]
                     }
+                    clone["currentList"] = listName
                     return clone
                 } catch (error) {
                     console.log(error)
 
                     const clone = {}
+                    clone["currentList"] = listName
                     clone[listName] = [{value: value, id: newTaskID()}]
                     return clone
                 }

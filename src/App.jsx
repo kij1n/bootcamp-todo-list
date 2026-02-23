@@ -1,26 +1,31 @@
 import TodoHeader from './components/TodoHeader.jsx'
+import TaskNameList from './components/TaskNameList.jsx'
 import TodoList from './components/TodoList.jsx'
 import TodoInput from './components/TodoInput.jsx'
-import {useState} from 'react'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
     const [taskData, setTaskData] = useState(() => {
         const dataStr = localStorage['taskData']
         if (!dataStr) {
-            return {}
+            return {"currentList": "index"}
         }
-
         try {
-            return JSON.parse(dataStr)
-            // eslint-disable-next-line no-unused-vars
+            const data = JSON.parse(dataStr)
+            if (!Object.prototype.hasOwnProperty.call(data, "currentList")) {
+                return {
+                    ...data, "currentList": "index"
+                }
+            }
+            return data
         } catch (error) {
-            // console.error(error)
-            return {}
+            console.error(error)
+            return {"currentList": "index"}
         }
-    });
+    })
 
-    const listName = 'test'
+    const listName = taskData.currentList
     const currentTasks = (() => {
         if (!taskData[listName]) {
             return []
@@ -30,9 +35,12 @@ function App() {
 
     return (
         <>
-            <TodoHeader listName={listName}/>
-            <TodoInput listName={listName} setTaskData={setTaskData}/>
-            <TodoList listName={listName} tasks={currentTasks()}/>
+            <TaskNameList taskData={taskData} setTaskData={setTaskData}/>
+            <div>
+                <TodoHeader listName={listName} />
+                <TodoInput listName={listName} taskData={taskData} setTaskData={setTaskData}/>
+                <TodoList listName={listName} tasks={currentTasks()}/>
+            </div>
         </>
     )
 }
