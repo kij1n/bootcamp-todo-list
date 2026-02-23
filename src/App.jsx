@@ -9,19 +9,19 @@ function App() {
     const [taskData, setTaskData] = useState(() => {
         const dataStr = localStorage['taskData']
         if (!dataStr) {
-            return {"currentList": "index"}
+            return {"currentList": "index", "index": []}
         }
         try {
             const data = JSON.parse(dataStr)
             if (!Object.prototype.hasOwnProperty.call(data, "currentList")) {
                 return {
-                    ...data, "currentList": "index"
+                    ...data, "currentList": "index", "index": []
                 }
             }
             return data
         } catch (error) {
             console.error(error)
-            return {"currentList": "index"}
+            return {"currentList": "index", "index": []}
         }
     })
 
@@ -38,7 +38,7 @@ function App() {
             <TaskNameList taskData={taskData} setTaskData={setTaskData}/>
             <div>
                 <TodoHeader listName={listName} />
-                <TodoInput listName={listName} taskData={taskData} setTaskData={setTaskData}/>
+                <TodoInput taskData={taskData} setTaskData={setTaskData}/>
                 <TodoList listName={listName} tasks={currentTasks()}/>
             </div>
         </>

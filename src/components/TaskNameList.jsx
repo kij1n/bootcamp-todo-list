@@ -1,3 +1,6 @@
+import { useState } from "react"
+import NewListPrompt from "./NewListPrompt.jsx";
+
 function TaskNameList(props) {
     const availableLists = (() => {
         const lists = [...Object.keys(props.taskData)].filter(k => k !== "currentList")
@@ -22,9 +25,15 @@ function TaskNameList(props) {
         localStorage.setItem("taskData", JSON.stringify(newData))
     }
 
+    const [newList, setNewList] = useState(false)
+
     return (
         <>
             <h2>Task lists</h2>
+            <button onClick={() => setNewList(true)}>Add</button>
+            {newList && (
+                <NewListPrompt taskData={props.taskData} setTaskData={props.setTaskData} setter={setNewList}/>
+            )}
             <ul>
                 {availableLists && availableLists.length > 0 && (
                     availableLists.map((listName) => (

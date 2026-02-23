@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 function TodoInput(props) {
-    const listName = props.listName
+    const listName = props.taskData.currentList
     const taskData = props.taskData
 
     const newTaskID = (() => {
@@ -39,11 +39,7 @@ function TodoInput(props) {
                 }
             })()
 
-            localStorage.setItem("taskData",
-                JSON.stringify(newData)
-            )
-            props.setTaskData(newData)
-            setValue("")
+
         }
     }
 
