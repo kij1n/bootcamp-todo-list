@@ -1,7 +1,7 @@
-import TodoHeader from './components/TodoHeader.jsx'
-import TaskNameList from './components/TaskNameList.jsx'
-import TodoList from './components/TodoList.jsx'
-import TodoInput from './components/TodoInput.jsx'
+import Header from './components/Header.jsx'
+import TaskNameList from './components/task-lists/TaskNameList.jsx'
+import TodoList from './components/task-display/TodoList.jsx'
+import TodoInput from './components/task-display/TodoInput.jsx'
 import { useState } from 'react'
 import './App.css'
 
@@ -37,7 +37,7 @@ function App() {
         <>
             <TaskNameList taskData={taskData} setTaskData={setTaskData}/>
             <div>
-                <TodoHeader listName={listName} />
+                <Header listName={listName} />
                 <TodoInput taskData={taskData} setTaskData={setTaskData}/>
                 <TodoList listName={listName} tasks={currentTasks()}/>
             </div>

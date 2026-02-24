@@ -34,7 +34,8 @@ function NewListPrompt(props) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 id="newListName"
-                placeholder="New list name" />
+                placeholder="New list name"
+            />
             <div className="btn-container">
                 <button onClick={() => props.setter(false)}>Cancel</button>
                 <button onClick={() => addNewList()}>Add</button>

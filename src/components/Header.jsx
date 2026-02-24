@@ -1,4 +1,4 @@
-function TodoHeader(props) {
+function Header(props) {
     const listName = props.listName
     return (
         <>
@@ -7,4 +7,4 @@ function TodoHeader(props) {
     )
 }
 
-export default TodoHeader
+export default Header
