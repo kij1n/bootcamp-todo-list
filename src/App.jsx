@@ -18,6 +18,10 @@ function App() {
                     ...data, "currentList": "index", "index": []
                 }
             }
+
+            const allTasks = Object.values(data).flat().filter(t => t.date instanceof Date);
+            allTasks.forEach(task => task.date = new Date(task.date))
+
             return data
         } catch (error) {
             console.error(error)
@@ -38,8 +42,8 @@ function App() {
             <TaskNameList taskData={taskData} setTaskData={setTaskData}/>
             <div>
                 <Header listName={listName} />
-                <TodoInput taskData={taskData} setTaskData={setTaskData}/>
-                <TodoList listName={listName} tasks={currentTasks()}/>
+                <TodoInput taskData={taskData} setTaskData={setTaskData} listName={listName}/>
+                <TodoList taskData={taskData} setTaskData={setTaskData} tasks={currentTasks()}/>
             </div>
         </>
     )

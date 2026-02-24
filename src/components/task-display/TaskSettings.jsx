@@ -1,10 +1,14 @@
 import {useState} from "react";
 
-function TaskSettings(props) {
+function TaskSettings({onClose, onSubmit}) {
     const [settings, setSettings] = useState({
-        date: null | Date,
-        repeat: null | String
+        date: Date(),
+        repeat: "none"
     })
+
+    const handleSubmit = () => {
+        onSubmit(settings)
+    }
 
     return (
         <>
@@ -27,8 +31,8 @@ function TaskSettings(props) {
             </select>
 
             <div>
-                <button onClick={props.onClose}>Cancel</button>
-                <button onClick={props.onSubmit(settings)}>Done</button>
+                <button onClick={onClose}>Cancel</button>
+                <button onClick={handleSubmit}>Done</button>
             </div>
         </>
     )

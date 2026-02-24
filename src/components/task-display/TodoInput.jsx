@@ -1,24 +1,14 @@
 import TaskSettings from "./TaskSettings";
 import {useState} from "react";
+import {newTaskID, getDataClone} from '../../shared/functions.js'
 
-function TodoInput(props) {
-    const listName = props.taskData.currentList
-    const taskData = props.taskData
-
-    const newTaskID = (() => {
-        const allTasks = Object.values(taskData).flat();
-        const ids = allTasks.map(t =>
-            (typeof t.id === 'number') ? t.id : -1
-        );
-        return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0;
-    });
-
+function TodoInput({taskData, listName, setTaskData}) {
     const [taskValue, setTaskValue] = useState(() => {
         return {
             value: "",
-            id: newTaskID(),
-            date: null | Date,
-            repeat: null | String
+            id: newTaskID(taskData),
+            date: Date(),
+            repeat: "none"
         }
     });
     const [moreSettings, setMoreSettings] = useState(false);
@@ -26,37 +16,29 @@ function TodoInput(props) {
     const handleEnter = (event) => {
         if (event.key === 'Enter' && taskValue.value !== '') {
             const newData = (() => {
-                try {
-                    const clone = structuredClone(taskData)
-                    if (
-                        Array.isArray(clone[listName]) &&
-                        clone[listName].length === 0
-                    ) {
-                        clone[listName] = [{...taskValue}]
-                    } else {
-                        clone[listName] = [...clone[listName], {...taskValue}]
-                    }
-                    clone["currentList"] = listName
-                    return clone
-                } catch (error) {
-                    console.log(error)
-
-                    const clone = {}
-                    clone["currentList"] = listName
+                const clone = getDataClone(taskData)
+                if (
+                    Array.isArray(clone[listName]) &&
+                    clone[listName].length === 0
+                ) {
                     clone[listName] = [{...taskValue}]
-                    return clone
+                } else {
+                    clone[listName] = [...clone[listName], {...taskValue}]
                 }
+
+                clone["currentList"] = listName
+                return clone
             })()
 
             localStorage.setItem("taskData",
                 JSON.stringify(newData)
             )
-            props.setTaskData(newData)
+            setTaskData(newData)
             setTaskValue({
                 value: "",
-                id: newTaskID() + 1,
-                date: null | Date,
-                repeat: null | String
+                id: newTaskID(taskData) + 1,
+                date: Date(),
+                repeat: "none"
             })
         }
     };
@@ -70,23 +52,24 @@ function TodoInput(props) {
 
     return (
         <>
-            {moreSettings ? (
+            { moreSettings ? (
                 <TaskSettings
                     onClose={() => setMoreSettings(false)}
                     onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}
-                    setter={setMoreSettings}
                 />
-            ) :
-                <input
-                    type="text"
-                    id="newTask"
-                    value={taskValue.value}
-                    onChange={(e) => setTaskValue((prev) => ({...prev, value: e.target.value}))}
-                    placeholder="Add a new task"
-                    onKeyDown={handleEnter}
-                />
-            }
-            <button onClick={() => setMoreSettings(true)}>More</button>
+            ) : (
+                <>
+                    <input
+                        type="text"
+                        id="newTask"
+                        value={taskValue.value}
+                        onChange={(e) => setTaskValue((prev) => ({...prev, value: e.target.value}))}
+                        placeholder="Add a new task"
+                        onKeyDown={handleEnter}
+                    />
+                    <button onClick={() => setMoreSettings(true)}>More</button>
+                </>
+            )}
         </>
     );
 }
