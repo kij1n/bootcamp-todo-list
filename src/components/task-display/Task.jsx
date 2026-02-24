@@ -1,7 +1,7 @@
 export const Task = (props) => {
     return (
         <>
-            <li>{props.task}</li>
+            <li>{props.task.value} {props.task.date}</li>
         </>
     )
 }

@@ -8,7 +8,7 @@ function TodoList(props) {
             {(tasks && tasks.length !== 0) && (
                 <ul>
                     {tasks.map((task) => (
-                        <Task task={task.value} key={task.id}/>
+                        <Task task={task} key={task.id}/>
                     ))}
                 </ul>
             )}

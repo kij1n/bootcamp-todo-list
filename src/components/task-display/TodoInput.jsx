@@ -1,3 +1,4 @@
+import TaskSettings from "./TaskSettings";
 import {useState} from "react";
 
 function TodoInput(props) {
@@ -5,17 +6,25 @@ function TodoInput(props) {
     const taskData = props.taskData
 
     const newTaskID = (() => {
-        const allTasks = Object.values(taskData).flat()
+        const allTasks = Object.values(taskData).flat();
         const ids = allTasks.map(t =>
             (typeof t.id === 'number') ? t.id : -1
-        )
-        return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0
-    })
+        );
+        return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0;
+    });
 
-    const [value, setValue] = useState("")
+    const [taskValue, setTaskValue] = useState(() => {
+        return {
+            value: "",
+            id: newTaskID(),
+            date: null | Date,
+            repeat: null | String
+        }
+    });
+    const [moreSettings, setMoreSettings] = useState(false);
 
     const handleEnter = (event) => {
-        if (event.key === 'Enter' && value !== '') {
+        if (event.key === 'Enter' && taskValue.value !== '') {
             const newData = (() => {
                 try {
                     const clone = structuredClone(taskData)
@@ -23,9 +32,9 @@ function TodoInput(props) {
                         Array.isArray(clone[listName]) &&
                         clone[listName].length === 0
                     ) {
-                        clone[listName] = [{value: value, id: newTaskID()}]
+                        clone[listName] = [{...taskValue}]
                     } else {
-                        clone[listName] = [...clone[listName], {value: value, id: newTaskID()}]
+                        clone[listName] = [...clone[listName], {...taskValue}]
                     }
                     clone["currentList"] = listName
                     return clone
@@ -34,7 +43,7 @@ function TodoInput(props) {
 
                     const clone = {}
                     clone["currentList"] = listName
-                    clone[listName] = [{value: value, id: newTaskID()}]
+                    clone[listName] = [{...taskValue}]
                     return clone
                 }
             })()
@@ -43,22 +52,43 @@ function TodoInput(props) {
                 JSON.stringify(newData)
             )
             props.setTaskData(newData)
-            setValue("")
+            setTaskValue({
+                value: "",
+                id: newTaskID() + 1,
+                date: null | Date,
+                repeat: null | String
+            })
         }
-    }
+    };
+    const handleSettingsSubmit = (settingsData) => {
+        const clone = structuredClone(taskValue)
+        clone.date = settingsData.date
+        clone.repeat = settingsData.repeat
+        setTaskValue(clone)
+        setMoreSettings(false)
+    };
 
     return (
         <>
-            <input
-                type="text"
-                id="newTask"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                placeholder="Add a new task"
-                onKeyDown={handleEnter}
-            />
+            {moreSettings ? (
+                <TaskSettings
+                    onClose={() => setMoreSettings(false)}
+                    onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}
+                    setter={setMoreSettings}
+                />
+            ) :
+                <input
+                    type="text"
+                    id="newTask"
+                    value={taskValue.value}
+                    onChange={(e) => setTaskValue((prev) => ({...prev, value: e.target.value}))}
+                    placeholder="Add a new task"
+                    onKeyDown={handleEnter}
+                />
+            }
+            <button onClick={() => setMoreSettings(true)}>More</button>
         </>
-    )
+    );
 }
 
-export default TodoInput
+export default TodoInput;
