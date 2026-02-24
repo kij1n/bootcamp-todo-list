@@ -30,9 +30,10 @@ function TaskNameList(props) {
     return (
         <>
             <h2>Task lists</h2>
-            <button onClick={() => setNewList(true)}>Add</button>
-            {newList && (
+            {newList ? (
                 <NewListPrompt taskData={props.taskData} setTaskData={props.setTaskData} setter={setNewList}/>
+            ) : (
+                <button onClick={() => setNewList(true)}>Add</button>
             )}
             <ul>
                 {availableLists && availableLists.length > 0 && (
