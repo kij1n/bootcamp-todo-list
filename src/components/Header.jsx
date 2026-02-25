@@ -1,8 +1,11 @@
-function Header(props) {
-    const listName = props.listName
+import { useContext } from "react"
+import {AppContext} from "../utils/AppContext.js";
+
+function Header() {
+    const [settings] = useContext(AppContext)
     return (
         <>
-            <h1>{listName}</h1>
+            <h1>{settings.currentList}</h1>
         </>
     )
 }
