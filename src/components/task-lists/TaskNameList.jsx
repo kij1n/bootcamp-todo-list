@@ -1,7 +1,7 @@
 import { useState } from "react"
 import NewListPrompt from "./NewListPrompt.jsx";
 
-function TaskNameList(props) {
+function TaskNameList() {
     const availableLists = (() => {
         const lists = [...Object.keys(props.taskData)].filter(k => k !== "currentList")
         return lists.length === 0 ? ["index"] : lists

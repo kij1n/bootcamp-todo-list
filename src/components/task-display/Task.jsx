@@ -1,17 +1,19 @@
+import {RepeatType} from "../../utils/enums.js";
+
 function getNewTask(task) {
     const newTask = structuredClone(task)
     switch (task.repeat) {
-        case "none": return null;
-        case "daily":
+        case RepeatType.NONE: return null;
+        case RepeatType.DAILY:
             newTask.date.setDate(newTask.date.getDate() + 1);
             break;
-        case "weekly":
+        case RepeatType.WEEKLY:
             newTask.date.setDate(newTask.date.getDate() + 7);
             break;
-        case "monthly":
+        case RepeatType.MONTHLY:
             newTask.date.setMonth(newTask.date.getMonth() + 1);
             break;
-        case "yearly":
+        case RepeatType.YEARLY:
             newTask.date.setFullYear(newTask.date.getFullYear() + 1);
             break;
         default:

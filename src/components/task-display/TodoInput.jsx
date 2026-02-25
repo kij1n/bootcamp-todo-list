@@ -1,6 +1,7 @@
 import TaskSettings from "./TaskSettings";
 import {useState} from "react";
 import {newTaskID, getDataClone} from '../../utils/functions.js'
+import {RepeatType} from "../../utils/enums.js";
 
 function TodoInput({taskData, listName, setTaskData}) {
     const [taskValue, setTaskValue] = useState(() => {
@@ -8,7 +9,7 @@ function TodoInput({taskData, listName, setTaskData}) {
             value: "",
             id: newTaskID(taskData),
             date: new Date(),
-            repeat: "none"
+            repeat: RepeatType.NONE
         }
     });
     const [moreSettings, setMoreSettings] = useState(false);
