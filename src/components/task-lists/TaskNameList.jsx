@@ -1,37 +1,26 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import NewListPrompt from "./NewListPrompt.jsx";
+import {AppContext} from "../../utils/AppContext.js";
+
 
 function TaskNameList() {
-    const availableLists = (() => {
-        const lists = [...Object.keys(props.taskData)].filter(k => k !== "currentList")
-        return lists.length === 0 ? ["index"] : lists
-    })()
-    const currentList = props.taskData.currentList
-
-    const setCurrentList = (listName) => {
-        const newData = (() => {
-            try {
-                const clone = structuredClone(props.taskData)
-                clone["currentList"] = listName
-                return clone
-            } catch (error) {
-                console.error(error)
-                const clone = {}
-                clone["currentList"] = listName
-                return clone
-            }
-        })()
-        props.setTaskData(newData)
-        localStorage.setItem("taskData", JSON.stringify(newData))
-    }
-
     const [newList, setNewList] = useState(false)
+    const [todos, settings, setSettings] = useContext(AppContext)
+
+    const availableLists = [...Object.keys(todos)]
+    const currentList = settings.currentList ?? "index"
+
+    const setCurrentList = (newListName) => {
+        const settingsClone = structuredClone(settings)
+        settingsClone.currentList = newListName
+        setSettings(settingsClone)
+    }
 
     return (
         <>
             <h2>Task lists</h2>
             {newList ? (
-                <NewListPrompt taskData={props.taskData} setTaskData={props.setTaskData} setter={setNewList}/>
+                <NewListPrompt setter={setNewList}/>
             ) : (
                 <button onClick={() => setNewList(true)}>Add</button>
             )}
