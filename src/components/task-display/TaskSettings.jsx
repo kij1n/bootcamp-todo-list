@@ -1,9 +1,10 @@
 import {useState} from "react";
+import {RepeatType} from "../../utils/enums.js";
 
 function TaskSettings({onClose, onSubmit}) {
     const [settings, setSettings] = useState({
         date: new Date(),
-        repeat: "none"
+        repeat: RepeatType.NONE
     })
 
     const handleSubmit = () => {
@@ -15,7 +16,7 @@ function TaskSettings({onClose, onSubmit}) {
             <input
                 type="date"
                 value={settings.date}
-                onChange={(e) => setSettings({...settings, date: e.target.value})}
+                onChange={(e) => setSettings((prev) => ({...prev, date: e.target.value}))}
             />
             <select
                 name="repeat"
@@ -23,11 +24,11 @@ function TaskSettings({onClose, onSubmit}) {
                 value={settings.repeat}
                 onChange={(e) => setSettings({...settings, repeat: e.target.value})}
             >
-                <option value="none">None</option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
+                <option value={RepeatType.NONE}>None</option>
+                <option value={RepeatType.DAILY}>Daily</option>
+                <option value={RepeatType.WEEKLY}>Weekly</option>
+                <option value={RepeatType.MONTHLY}>Monthly</option>
+                <option value={RepeatType.YEARLY}>Yearly</option>
             </select>
 
             <div>

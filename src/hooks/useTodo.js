@@ -7,6 +7,7 @@ function sortTasks(tasks, type) {
             case SortType.DATE: return a.date > b.date;
             case SortType.NAME: return a.value.localeCompare(b.value);
             case SortType.PRIORITY: return a.priority > b.priority;
+            default: return 0;
         }
     })
 }
@@ -16,7 +17,9 @@ function useTodo() {
     // const [settings] = useLocalStorage("settings", {})
     // const listName = settings["currentList"] ?? "index"
 
-    const getTodos = (sortingType) => sortTasks(todos, sortingType) ?? []
+    const getTodos = (sortingType = SortType.NONE, listName = null) => {
+        return sortTasks(todos[listName], sortingType) ?? []
+    }
     const addTodo = (task, listName) => {
         setTodos({
             ...todos, [listName]: [...todos[listName], task]

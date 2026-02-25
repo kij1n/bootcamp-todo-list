@@ -1,45 +1,49 @@
 import TaskSettings from "./TaskSettings";
-import {useState} from "react";
-import {newTaskID, getDataClone} from '../../utils/functions.js'
+import {useContext, useState} from "react";
+import {newTaskID} from '../../utils/functions.js'
 import {RepeatType} from "../../utils/enums.js";
+import {AppContext} from "../../utils/AppContext.js";
 
-function TodoInput({taskData, listName, setTaskData}) {
+function TodoInput() {
+    const [getTodos, addTodo, settings] = useContext(AppContext)
+
+    const [moreSettings, setMoreSettings] = useState(false);
     const [taskValue, setTaskValue] = useState(() => {
         return {
             value: "",
-            id: newTaskID(taskData),
+            id: newTaskID(getTodos()),
             date: new Date(),
             repeat: RepeatType.NONE
         }
-    });
-    const [moreSettings, setMoreSettings] = useState(false);
+    })
 
     const handleEnter = (event) => {
         if (event.key === 'Enter' && taskValue.value !== '') {
-            const newData = (() => {
-                const clone = getDataClone(taskData)
-                if (
-                    Array.isArray(clone[listName]) &&
-                    clone[listName].length === 0
-                ) {
-                    clone[listName] = [{...taskValue}]
-                } else {
-                    clone[listName] = [...clone[listName], {...taskValue}]
-                }
-
-                clone["currentList"] = listName
-                return clone
-            })()
-
-            localStorage.setItem("taskData",
-                JSON.stringify(newData)
-            )
-            setTaskData(newData)
+            addTodo(taskValue, settings.currentList)
+            // const newData = (() => {
+            //     const clone = getDataClone(taskData)
+            //     if (
+            //         Array.isArray(clone[listName]) &&
+            //         clone[listName].length === 0
+            //     ) {
+            //         clone[listName] = [{...taskValue}]
+            //     } else {
+            //         clone[listName] = [...clone[listName], {...taskValue}]
+            //     }
+            //
+            //     clone["currentList"] = listName
+            //     return clone
+            // })()
+            //
+            // localStorage.setItem("taskData",
+            //     JSON.stringify(newData)
+            // )
+            // setTaskData(newData)
             setTaskValue({
                 value: "",
-                id: newTaskID(taskData) + 1,
+                id: newTaskID(getTodos()) + 1,
                 date: new Date(),
-                repeat: "none"
+                repeat: RepeatType.NONE
             })
         }
     };
@@ -53,7 +57,7 @@ function TodoInput({taskData, listName, setTaskData}) {
 
     return (
         <>
-            { moreSettings ? (
+            {moreSettings ? (
                 <TaskSettings
                     onClose={() => setMoreSettings(false)}
                     onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}

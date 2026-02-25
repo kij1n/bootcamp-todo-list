@@ -1,7 +1,8 @@
 export const SortType = Object.freeze({
     DATE: "date",
     NAME: "name",
-    PRIORITY: "priority"
+    PRIORITY: "priority",
+    NONE: "none"
 })
 
 export const RepeatType = Object.freeze({
