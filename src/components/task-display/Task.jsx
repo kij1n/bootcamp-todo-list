@@ -1,4 +1,6 @@
 import {RepeatType} from "../../utils/enums.js";
+import {AppContext} from "../../utils/AppContext.js";
+import {useContext} from "react";
 
 function getNewTask(task) {
     const newTask = structuredClone(task)
@@ -22,17 +24,14 @@ function getNewTask(task) {
     return newTask
 }
 
-function Task({task, taskData, setTaskData}) {
+function Task({task}) {
+    const [addTodo, removeTodo, settings] = useContext(AppContext)
+
     const completeTask = () => {
-        const newTask = getNewTask(task)
-        const clone = structuredClone(taskData)
-        let currentList = taskData["currentList"]
-        clone[currentList] = [
-            ...clone[currentList].filter(t => t.id !== task.id),
-            ...(newTask ? [newTask] : [])
-        ]
-        setTaskData(clone)
-        localStorage.setItem("taskData", JSON.stringify(clone))
+        removeTodo(task.id, settings.currentList)
+        if (task.repeat !== RepeatType.NONE) {
+            addTodo(getNewTask(task), settings.currentList)
+        }
     }
 
     return (

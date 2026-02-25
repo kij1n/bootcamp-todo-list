@@ -15,7 +15,7 @@ function sortTasks(tasks, type) {
 function useTodo() {
     const [todos, setTodos] = useLocalStorage("todos", {})
 
-    const getTodos = (sortingType = SortType.NONE, listName = null) => {
+    const getTodos = (listName = null, sortingType = SortType.NONE) => {
         return sortTasks(todos[listName], sortingType) ?? []
     }
     const addTodo = (task, listName) => {
