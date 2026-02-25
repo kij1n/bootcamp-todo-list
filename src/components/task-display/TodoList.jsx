@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {AppContext} from "../../utils/AppContext.js";
 
 function TodoList() {
-    const [getTodos, settings] = useContext(AppContext)
+    const {getTodos, settings} = useContext(AppContext)
     const tasks = getTodos(settings.currentList)
 
     return (

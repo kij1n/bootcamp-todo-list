@@ -5,7 +5,7 @@ import {RepeatType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 
 function TodoInput() {
-    const [getTodos, addTodo, settings] = useContext(AppContext)
+    const {getTodos, addTodo, settings} = useContext(AppContext)
 
     const [moreSettings, setMoreSettings] = useState(false);
     const [taskValue, setTaskValue] = useState(() => {

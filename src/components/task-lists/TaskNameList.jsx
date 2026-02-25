@@ -5,7 +5,7 @@ import {AppContext} from "../../utils/AppContext.js";
 
 function TaskNameList() {
     const [newList, setNewList] = useState(false)
-    const [todos, settings, setSettings] = useContext(AppContext)
+    const {todos, settings, setSettings} = useContext(AppContext)
 
     const availableLists = [...Object.keys(todos)]
     const currentList = settings.currentList ?? "index"

@@ -25,7 +25,7 @@ function getNewTask(task) {
 }
 
 function Task({task}) {
-    const [addTodo, removeTodo, settings] = useContext(AppContext)
+    const {addTodo, removeTodo, settings} = useContext(AppContext)
 
     const completeTask = () => {
         removeTodo(task.id, settings.currentList)
