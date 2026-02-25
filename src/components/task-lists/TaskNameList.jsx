@@ -5,10 +5,10 @@ import {AppContext} from "../../utils/AppContext.js";
 
 function TaskNameList() {
     const [newList, setNewList] = useState(false)
-    const {todos, settings, setSettings} = useContext(AppContext)
+    const {getTodos, settings, setSettings} = useContext(AppContext)
 
-    const availableLists = [...Object.keys(todos)]
-    const currentList = settings.currentList ?? "index"
+    const availableLists = [...Object.keys(getTodos())]
+    const currentList = settings?.currentList ?? "index"
 
     const setCurrentList = (newListName) => {
         const settingsClone = structuredClone(settings)

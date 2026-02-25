@@ -1,7 +1,9 @@
 import useLocalStorage from "./useLocalStorage.js";
 import {SortType} from "../utils/enums.js"
 
-function sortTasks(tasks, type) {
+function sortTasks(allTasks, type, listName) {
+    const tasks = allTasks?.[listName] ?? []
+
     return tasks.toSorted((a, b) => {
         switch (type) {
             case SortType.DATE: return a.date > b.date;
@@ -16,7 +18,7 @@ function useTodo() {
     const [todos, setTodos] = useLocalStorage("todos", {})
 
     const getTodos = (listName = null, sortingType = SortType.NONE) => {
-        return sortTasks(todos[listName], sortingType) ?? []
+        return sortTasks(todos, sortingType, listName) //?? []
     }
     const addTodo = (task, listName) => {
         setTodos({

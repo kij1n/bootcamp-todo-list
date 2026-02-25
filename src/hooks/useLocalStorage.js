@@ -1,26 +1,34 @@
 import {useState} from "react";
-import {Priority, RepeatType, FilterType, SortType} from "../utils/enums.js";
+import {FilterType, Priority, RepeatType, SortType} from "../utils/enums.js";
 
 function useLocalStorage(key, initialValue) {
     const [value, setValue] = useState(() => {
         const item = localStorage.getItem(key)
-        return item ? JSON.parse(item) : initialValue
+        try {
+            const parsedItem = JSON.parse(item)
+            if (key === "todos") {
+                const allTasks = Object.values(parsedItem ?? []).flat()
+                allTasks.forEach(task => {
+                    task.date = new Date(task.date)
+                    task.priority = Object.values(Priority).find(p => p === task.priority)
+                    task.repeat = Object.values(RepeatType).find(r => r === task.repeat)
+                })
+                return parsedItem
+            }
+            else if (key === "settings") {
+                return {
+                    ...parsedItem,
+                    currentList: parsedItem?.currentList ?? "index",
+                    sorting: Object.values(SortType).find(p => p === parsedItem?.sorting) ?? SortType.NONE,
+                    filter: Object.values(FilterType).find(r => r === parsedItem?.filter) ?? FilterType.ALL
+                }
+            }
+        } catch (error) {
+            console.error(error)
+            return initialValue
+        }
+        return initialValue
     })
-    if (key === "todos") {
-        const allTasks = Object.values(value).flat()
-        allTasks.forEach(task => {
-            task.date = new Date(task.date)
-            task.priority = Object.values(Priority).find(p => p === task.priority)
-            task.repeat = Object.values(RepeatType).find(r => r === task.repeat)
-        })
-    }
-    else if (key === "settings") {
-        const cloneValue = structuredClone(value)
-        cloneValue.currentList = value.currentList ?? "index"
-        cloneValue.sorting = Object.values(SortType).find(p => p === value.sorting) ?? SortType.NONE
-        cloneValue.filter = Object.values(FilterType).find(r => r === value.filter) ?? FilterType.ALL
-        setValue(cloneValue)
-    }
 
     const setStoredValue = (newValue) => {
         setValue(newValue)
