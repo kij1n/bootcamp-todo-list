@@ -1,6 +1,6 @@
 import TaskSettings from "./TaskSettings";
 import {useState} from "react";
-import {newTaskID, getDataClone} from '../../shared/functions.js'
+import {newTaskID, getDataClone} from '../../utils/functions.js'
 
 function TodoInput({taskData, listName, setTaskData}) {
     const [taskValue, setTaskValue] = useState(() => {

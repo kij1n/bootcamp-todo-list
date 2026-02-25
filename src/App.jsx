@@ -7,7 +7,7 @@ import './App.css'
 
 function App() {
     const [taskData, setTaskData] = useState(() => {
-        const dataStr = localStorage['taskData']
+        const dataStr = localStorage.getItem("taskData")
         if (!dataStr) {
             return {"currentList": "index", "index": []}
         }
@@ -30,12 +30,6 @@ function App() {
     })
 
     const listName = taskData.currentList
-    const currentTasks = (() => {
-        if (!taskData[listName]) {
-            return []
-        }
-        return taskData[listName]
-    })
 
     return (
         <>
@@ -43,7 +37,7 @@ function App() {
             <div>
                 <Header listName={listName} />
                 <TodoInput taskData={taskData} setTaskData={setTaskData} listName={listName}/>
-                <TodoList taskData={taskData} setTaskData={setTaskData} tasks={currentTasks()}/>
+                <TodoList taskData={taskData} setTaskData={setTaskData} tasks={taskData[listName] ?? []}/>
             </div>
         </>
     )
