@@ -5,15 +5,3 @@ export function newTaskID(taskData) {
     );
     return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0;
 }
-
-// export function getDataClone(taskData) {
-//     try {
-//         // const allTasks = Object.values(taskData).flat().filter(t => t.date instanceof Date);
-//         // allTasks.forEach(task => task.date = new Date(task.date))
-//
-//         return structuredClone(taskData)
-//     } catch (error) {
-//         console.log(error)
-//         return {}
-//     }
-// }

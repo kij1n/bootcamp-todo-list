@@ -20,25 +20,6 @@ function TodoInput() {
     const handleEnter = (event) => {
         if (event.key === 'Enter' && taskValue.value !== '') {
             addTodo(taskValue, settings.currentList)
-            // const newData = (() => {
-            //     const clone = getDataClone(taskData)
-            //     if (
-            //         Array.isArray(clone[listName]) &&
-            //         clone[listName].length === 0
-            //     ) {
-            //         clone[listName] = [{...taskValue}]
-            //     } else {
-            //         clone[listName] = [...clone[listName], {...taskValue}]
-            //     }
-            //
-            //     clone["currentList"] = listName
-            //     return clone
-            // })()
-            //
-            // localStorage.setItem("taskData",
-            //     JSON.stringify(newData)
-            // )
-            // setTaskData(newData)
             setTaskValue({
                 value: "",
                 id: newTaskID(getTodos()) + 1,

@@ -14,8 +14,6 @@ function sortTasks(tasks, type) {
 
 function useTodo() {
     const [todos, setTodos] = useLocalStorage("todos", {})
-    // const [settings] = useLocalStorage("settings", {})
-    // const listName = settings["currentList"] ?? "index"
 
     const getTodos = (sortingType = SortType.NONE, listName = null) => {
         return sortTasks(todos[listName], sortingType) ?? []
