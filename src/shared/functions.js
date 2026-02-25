@@ -8,9 +8,10 @@ export function newTaskID(taskData) {
 
 export function getDataClone(taskData) {
     try {
-        const clone = structuredClone(taskData)
-        clone.date = new Date(clone.date)
-        return clone
+        // const allTasks = Object.values(taskData).flat().filter(t => t.date instanceof Date);
+        // allTasks.forEach(task => task.date = new Date(task.date))
+
+        return structuredClone(taskData)
     } catch (error) {
         console.log(error)
         return {}

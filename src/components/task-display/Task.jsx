@@ -1,6 +1,5 @@
 function getNewTask(task) {
     const newTask = structuredClone(task)
-    if (task.repeat === "none") return null
     switch (task.repeat) {
         case "none": return null;
         case "daily":
@@ -36,7 +35,7 @@ function Task({task, taskData, setTaskData}) {
 
     return (
         <>
-            <li><button onClick={completeTask}>Done</button>{task.value} {task.date}</li>
+            <li><button onClick={completeTask}>Done</button>{task.value} {task.date.toISOString()}</li>
         </>
     )
 }

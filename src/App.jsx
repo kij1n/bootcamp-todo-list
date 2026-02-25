@@ -19,7 +19,7 @@ function App() {
                 }
             }
 
-            const allTasks = Object.values(data).flat().filter(t => t.date instanceof Date);
+            const allTasks = Object.values(data).flat().filter(t => t && t.date);
             allTasks.forEach(task => task.date = new Date(task.date))
 
             return data

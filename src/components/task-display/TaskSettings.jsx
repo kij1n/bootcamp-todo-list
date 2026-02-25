@@ -2,7 +2,7 @@ import {useState} from "react";
 
 function TaskSettings({onClose, onSubmit}) {
     const [settings, setSettings] = useState({
-        date: Date(),
+        date: new Date(),
         repeat: "none"
     })
 

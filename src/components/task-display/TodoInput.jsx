@@ -7,7 +7,7 @@ function TodoInput({taskData, listName, setTaskData}) {
         return {
             value: "",
             id: newTaskID(taskData),
-            date: Date(),
+            date: new Date(),
             repeat: "none"
         }
     });
@@ -37,16 +37,16 @@ function TodoInput({taskData, listName, setTaskData}) {
             setTaskValue({
                 value: "",
                 id: newTaskID(taskData) + 1,
-                date: Date(),
+                date: new Date(),
                 repeat: "none"
             })
         }
     };
     const handleSettingsSubmit = (settingsData) => {
-        const clone = structuredClone(taskValue)
-        clone.date = settingsData.date
-        clone.repeat = settingsData.repeat
-        setTaskValue(clone)
+        const taskClone = structuredClone(taskValue)
+        taskClone.date = new Date(settingsData.date)
+        taskClone.repeat = settingsData.repeat
+        setTaskValue(taskClone)
         setMoreSettings(false)
     };
 
