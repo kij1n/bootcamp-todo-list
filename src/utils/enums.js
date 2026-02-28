@@ -19,9 +19,3 @@ export const Priority = Object.freeze({
     HIGH: 3,
     NONE: 0
 })
-
-export const FilterType = Object.freeze({
-    ALL: "all",
-    DONE: "done",
-    NOT_DONE: "notDone"
-})

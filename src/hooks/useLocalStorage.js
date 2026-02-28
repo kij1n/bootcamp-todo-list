@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {FilterType, Priority, RepeatType, SortType} from "../utils/enums.js";
+import {Priority, RepeatType, SortType} from "../utils/enums.js";
 
 function prepareTodos(parsedItem) {
     if (!parsedItem) {
@@ -19,8 +19,7 @@ function prepareSettings(parsedItem) {
     return {
         ...parsedItem,
         currentList: parsedItem?.currentList ?? "index",
-        sorting: Object.values(SortType).find(p => p === parsedItem?.sorting) ?? SortType.NONE,
-        filter: Object.values(FilterType).find(r => r === parsedItem?.filter) ?? FilterType.ALL
+        sorting: Object.values(SortType).find(p => p === parsedItem?.sorting) ?? SortType.NONE
     }
 }
 
