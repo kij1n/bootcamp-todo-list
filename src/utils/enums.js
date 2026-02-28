@@ -19,3 +19,10 @@ export const Priority = Object.freeze({
     HIGH: 3,
     NONE: 0
 })
+
+export const ViewFilter = Object.freeze({
+    TODAY: "today",
+    THIS_WEEK: "thisWeek",
+    LATER: "later",
+    ALL: "ALL"
+})
