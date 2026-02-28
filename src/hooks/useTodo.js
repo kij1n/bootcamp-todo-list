@@ -14,7 +14,7 @@ function sortTasks(allTasks, type, listName) {
         switch (type) {
             case SortType.DATE: return a.date > b.date;
             case SortType.NAME: return a.value.localeCompare(b.value);
-            case SortType.PRIORITY: return a.priority > b.priority;
+            case SortType.PRIORITY: return a.priority < b.priority;
             default: return 0;
         }
     })

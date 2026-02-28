@@ -16,7 +16,8 @@ export const RepeatType = Object.freeze({
 export const Priority = Object.freeze({
     LOW: 1,
     MEDIUM: 2,
-    HIGH: 3
+    HIGH: 3,
+    NONE: 0
 })
 
 export const FilterType = Object.freeze({
