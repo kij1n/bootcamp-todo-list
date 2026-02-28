@@ -2,7 +2,12 @@ import useLocalStorage from "./useLocalStorage.js";
 import {SortType} from "../utils/enums.js"
 
 function sortTasks(allTasks, type, listName) {
-    const tasks = allTasks?.[listName] ?? []
+    const tasks = (() => {
+        if (listName) {
+            return allTasks?.[listName] ?? []
+        }
+        return Object.values(allTasks).flat()
+    })()
 
     return tasks.toSorted((a, b) => {
         switch (type) {
@@ -17,6 +22,7 @@ function sortTasks(allTasks, type, listName) {
 function useTodo() {
     const [todos, setTodos] = useLocalStorage("todos", {})
 
+    const getListNames = () => Object.keys(todos)
     const getTodos = (listName = null, sortingType = SortType.NONE) => {
         return sortTasks(todos, sortingType, listName) //?? []
     }
@@ -30,7 +36,13 @@ function useTodo() {
             ...todos, [listName]: todos[listName].filter(t => t.id !== id)
         })
     }
-    return [getTodos, addTodo, removeTodo]
+    const addList = (listName) => {
+        setTodos({
+            ...todos, [listName]: []
+        })
+    }
+
+    return [getTodos, addTodo, removeTodo, addList, getListNames]
 }
 
 export default useTodo;

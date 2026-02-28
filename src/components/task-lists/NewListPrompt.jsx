@@ -1,30 +1,16 @@
-import { useState } from "react"
+import {useContext, useState} from "react"
+import {AppContext} from "../../utils/AppContext.js";
 
-function NewListPrompt(props) {
+function NewListPrompt({setter}) {
     const [value, setValue] = useState("")
+    const {addList} = useContext(AppContext)
 
-    const addNewList = () => {
-        const value = document.getElementById("newListName").value
-        if (value === "") return
-        const newData = (() => {
-            try {
-                const clone = structuredClone(props.taskData)
-                clone[value] = []
-                return clone
-            } catch (error) {
-                console.error(error)
-                const clone = {}
-                clone[value] = []
-                return clone
-            }
-        })()
-
-        localStorage.setItem("taskData",
-            JSON.stringify(newData)
-        )
-        props.setTaskData(newData)
+    const addListOnClick = () => {
+        if (value !== "") {
+            addList(value)
+            setter(false)
+        }
         setValue("")
-        props.setter(false) // close the prompt
     }
 
     return (
@@ -37,8 +23,8 @@ function NewListPrompt(props) {
                 placeholder="New list name"
             />
             <div className="btn-container">
-                <button onClick={() => props.setter(false)}>Cancel</button>
-                <button onClick={() => addNewList()}>Add</button>
+                <button onClick={() => setter(false)}>Cancel</button>
+                <button onClick={() => addListOnClick()}>Add</button>
             </div>
         </>
     )
