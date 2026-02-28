@@ -3,9 +3,9 @@ import {SortType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 
 function DisplaySettings() {
-    const {setSettings} = useContext(AppContext)
+    const {settings, setSettings} = useContext(AppContext)
 
-    const [sorting, setSorting] = useState(SortType.NONE)
+    const [sorting, setSorting] = useState(settings.sorting)
 
     const handleChange = (e) => {
         const val = e.target.value

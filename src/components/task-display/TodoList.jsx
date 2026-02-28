@@ -5,7 +5,7 @@ import DisplaySettings from "./DisplaySettings.jsx";
 
 function TodoList() {
     const {getTodos, settings} = useContext(AppContext)
-    const tasks = getTodos(settings.currentList)
+    const tasks = getTodos(settings.currentList, settings.sorting)
 
     return (
         <>
