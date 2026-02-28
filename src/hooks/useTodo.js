@@ -1,5 +1,6 @@
 import useLocalStorage from "./useLocalStorage.js";
 import {SortType} from "../utils/enums.js"
+import {newTaskID} from "../utils/functions.js";
 
 function sortTasks(allTasks, type, listName) {
     const tasks = (() => {
@@ -27,6 +28,7 @@ function useTodo() {
         return sortTasks(todos, sortingType, listName) //?? []
     }
     const addTodo = (task, listName) => {
+        task = {...task, id: newTaskID(getTodos())}
         setTodos({
             ...todos, [listName]: [...todos[listName], task]
         })

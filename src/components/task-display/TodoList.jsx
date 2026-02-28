@@ -1,6 +1,7 @@
 import Task from './Task.jsx'
 import {useContext} from "react";
 import {AppContext} from "../../utils/AppContext.js";
+import DisplaySettings from "./DisplaySettings.jsx";
 
 function TodoList() {
     const {getTodos, settings} = useContext(AppContext)
@@ -8,6 +9,7 @@ function TodoList() {
 
     return (
         <>
+            <DisplaySettings />
             {(tasks && tasks.length !== 0) && (
                 <ul>
                     {tasks.map((task) => (

@@ -1,8 +1,10 @@
 export function newTaskID(todos) {
-    const allTasks = Object.values(todos).flat();
-    const ids = allTasks.map(t =>
+    // const allTasks = Object.values(todos).flat();
+    // console.log(todos)
+    const ids = todos.map(t =>
         (typeof t.id === 'number') ? t.id : -1
     )
+    // console.log(ids)
     return (ids && ids.length > 0) ? Math.max(...ids) + 1 : 0;
 }
 

@@ -5,13 +5,13 @@ import {AppContext} from "../../utils/AppContext.js";
 function DisplaySettings() {
     const {setSettings} = useContext(AppContext)
 
-    const [sorting, setSorting] = useState(() => {
-        const sorting = SortType.NONE
-        const setSorting = (newVal) => {
-            setSettings((prev) => ({...prev, sorting: newVal}))
-        }
-        return [sorting, setSorting]
-    })
+    const [sorting, setSorting] = useState(SortType.NONE)
+
+    const handleChange = (e) => {
+        const val = e.target.value
+        setSorting(val)
+        setSettings((prev) => ({...prev, sorting: val}))
+    }
 
     return (
         <>
@@ -19,7 +19,7 @@ function DisplaySettings() {
             name='sorting'
             id='select-sorting'
             value={sorting}
-            onChange={(e) => setSorting(e.target.value)}
+            onChange={handleChange}
             >
                 <option value={SortType.NONE}>None</option>
                 <option value={SortType.NAME}>Name</option>

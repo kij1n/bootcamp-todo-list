@@ -43,8 +43,11 @@ function useLocalStorage(key, initialValue) {
     })
 
     const setStoredValue = (newValue) => {
-        setValue(newValue)
-        localStorage.setItem(key, JSON.stringify(newValue))
+        setValue((prev) => {
+            const val = typeof newValue === 'function' ? newValue(prev) : newValue
+            localStorage.setItem(key, JSON.stringify(val))
+            return val
+        })
     }
 
     return [value, setStoredValue]

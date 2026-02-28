@@ -1,17 +1,15 @@
 import TaskSettings from "./TaskSettings";
 import {useContext, useState} from "react";
-import {newTaskID} from '../../utils/functions.js'
 import {RepeatType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 
 function TodoInput() {
-    const {getTodos, addTodo, settings} = useContext(AppContext)
+    const {addTodo, settings} = useContext(AppContext)
 
     const [moreSettings, setMoreSettings] = useState(false);
     const [taskValue, setTaskValue] = useState(() => {
         return {
             value: "",
-            id: newTaskID(getTodos()),
             date: new Date(),
             repeat: RepeatType.NONE
         }
@@ -22,7 +20,6 @@ function TodoInput() {
             addTodo(taskValue, settings.currentList)
             setTaskValue({
                 value: "",
-                id: newTaskID(getTodos()) + 1,
                 date: new Date(),
                 repeat: RepeatType.NONE
             })
