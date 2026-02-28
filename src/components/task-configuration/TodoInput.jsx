@@ -1,7 +1,8 @@
-import TaskSettings from "./TaskSettings";
+import TaskSettings from "./TaskSettings.jsx";
 import {useContext, useState} from "react";
 import {RepeatType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
+import {getToday} from "../../utils/functions.js";
 
 function TodoInput() {
     const {addTodo, settings} = useContext(AppContext)
@@ -10,7 +11,7 @@ function TodoInput() {
     const [taskValue, setTaskValue] = useState(() => {
         return {
             value: "",
-            date: new Date(),
+            date: getToday(),
             repeat: RepeatType.NONE
         }
     })
@@ -20,7 +21,7 @@ function TodoInput() {
             addTodo(taskValue, settings.currentList)
             setTaskValue({
                 value: "",
-                date: new Date(),
+                date: getToday(),
                 repeat: RepeatType.NONE
             })
         }

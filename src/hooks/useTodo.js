@@ -1,5 +1,6 @@
 import useLocalStorage from "./useLocalStorage.js";
-import {Priority, RepeatType, SortType} from "../utils/enums.js"
+import {Priority, RepeatType, SortType, ViewFilter} from "../utils/enums.js"
+import {sameWeek, laterThanWeekDate, getToday} from "../utils/functions.js";
 
 function prepareTodos(parsedItem) {
     if (!parsedItem) {
@@ -15,8 +16,20 @@ function prepareTodos(parsedItem) {
     return parsedItem
 }
 
+function filterTasks(tasks, filter) {
+    return tasks.filter(t => {
+        switch (filter) {
+            case ViewFilter.ALL: return true;
+            case ViewFilter.TODAY: return t.date.toDateString() === getToday().toDateString();
+            case ViewFilter.THIS_WEEK: return sameWeek(t.date, getToday());
+            case ViewFilter.LATER: return laterThanWeekDate(t.date, getToday());
+            default: return true;
+        }
+    })
+}
+
 function sortTasks(allTasks, type, listName) {
-    const tasks = (() => {
+    const tasks = (() => { // tasks: [task, task, task]
         if (listName) {
             return allTasks?.[listName] ?? []
         }
@@ -34,15 +47,19 @@ function sortTasks(allTasks, type, listName) {
 }
 
 function useTodo() {
-    const [todos, setTodos] = useLocalStorage(
+    const [todos, setTodos] = useLocalStorage( // todos: {listName: [task, task, task]}
         "todos",
         {},
         prepareTodos
     )
 
     const getListNames = () => Object.keys(todos)
-    const getTodos = (listName = null, sortingType = SortType.NONE) => {
-        return sortTasks(todos, sortingType, listName) //?? []
+    const getTodos = (
+        listName = null,
+        sortingType = SortType.NONE,
+        filter = ViewFilter.ALL
+    ) => {
+        return filterTasks(sortTasks(todos, sortingType, listName), filter)
     }
     const addTodo = (task, listName) => {
         task = {...task, id: Date.now().toString()}

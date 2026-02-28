@@ -1,7 +1,7 @@
 import Header from './components/Header.jsx'
 import TaskNameList from './components/task-lists/TaskNameList.jsx'
 import TodoList from './components/task-display/TodoList.jsx'
-import TodoInput from './components/task-display/TodoInput.jsx'
+import TodoInput from './components/task-configuration/TodoInput.jsx'
 import useLocalStorage from "./hooks/useLocalStorage.js"
 import useTodo from "./hooks/useTodo.js";
 import { AppContext } from "./utils/AppContext.js";

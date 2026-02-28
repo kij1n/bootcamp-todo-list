@@ -24,5 +24,5 @@ export const ViewFilter = Object.freeze({
     TODAY: "today",
     THIS_WEEK: "thisWeek",
     LATER: "later",
-    ALL: "ALL"
+    ALL: "all"
 })
