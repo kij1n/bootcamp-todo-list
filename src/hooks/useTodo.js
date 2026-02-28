@@ -1,6 +1,19 @@
 import useLocalStorage from "./useLocalStorage.js";
-import {SortType} from "../utils/enums.js"
-import {newTaskID} from "../utils/functions.js";
+import {Priority, RepeatType, SortType} from "../utils/enums.js"
+
+function prepareTodos(parsedItem) {
+    if (!parsedItem) {
+        return {"index": []}
+    }
+
+    const allTasks = Object.values(parsedItem ?? []).flat()
+    allTasks.forEach(task => {
+        task.date = new Date(task.date)
+        task.priority = Object.values(Priority).find(p => p === task.priority)
+        task.repeat = Object.values(RepeatType).find(r => r === task.repeat)
+    })
+    return parsedItem
+}
 
 function sortTasks(allTasks, type, listName) {
     const tasks = (() => {
@@ -21,14 +34,18 @@ function sortTasks(allTasks, type, listName) {
 }
 
 function useTodo() {
-    const [todos, setTodos] = useLocalStorage("todos", {})
+    const [todos, setTodos] = useLocalStorage(
+        "todos",
+        {},
+        prepareTodos
+    )
 
     const getListNames = () => Object.keys(todos)
     const getTodos = (listName = null, sortingType = SortType.NONE) => {
         return sortTasks(todos, sortingType, listName) //?? []
     }
     const addTodo = (task, listName) => {
-        task = {...task, id: newTaskID(getTodos())}
+        task = {...task, id: Date.now().toString()}
         setTodos({
             ...todos, [listName]: [...todos[listName], task]
         })

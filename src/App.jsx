@@ -7,12 +7,26 @@ import useTodo from "./hooks/useTodo.js";
 import { AppContext } from "./utils/AppContext.js";
 import { addIfEmpty } from "./utils/functions.js";
 import './App.css'
+import {useEffect} from "react";
+import {SortType} from "./utils/enums.js";
 
 function App() {
-    addIfEmpty()
+    useEffect(() => {
+        addIfEmpty()
+    }, [])
 
     const [getTodos, addTodo, removeTodo, addList, getListNames] = useTodo()
-    const [settings, setSettings] = useLocalStorage("settings", {})
+    const [settings, setSettings] = useLocalStorage(
+        "settings",
+        {},
+        (parsedItem) => {
+            return {
+                ...parsedItem,
+                currentList: parsedItem?.currentList ?? "index",
+                sorting: Object.values(SortType).find(p => p === parsedItem?.sorting) ?? SortType.NONE
+            }
+        }
+    )
 
     // TODO: sorting with date an priority
     // TODO: remove filtering
