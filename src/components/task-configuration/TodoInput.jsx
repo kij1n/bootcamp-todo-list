@@ -52,6 +52,7 @@ function TodoInput() {
                         onChange={(e) => setTaskValue((prev) => ({...prev, value: e.target.value}))}
                         placeholder="Add a new task"
                         onKeyDown={handleEnter}
+                        className="input"
                     />
                     <button onClick={() => setMoreSettings(true)}>More</button>
                 </>

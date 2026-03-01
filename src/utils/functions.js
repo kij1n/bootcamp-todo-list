@@ -13,8 +13,6 @@ export function addIfEmpty() {
 }
 
 export function sameWeek(date, today) {
-    // if (Math.abs(date1 - date2) > 7*24*60*60*1000) return false
-
     const [weekStart, weekEnd] = (() => {
         const weekStart = new Date(today)
         weekStart.setDate(weekStart.getDate() - weekStart.getDay())
@@ -22,11 +20,6 @@ export function sameWeek(date, today) {
         weekEnd.setDate(weekEnd.getDate() + 7)
         return [weekStart, weekEnd]
     })()
-
-    console.log(weekStart, weekEnd)
-    console.log(date)
-    console.log(date >= weekStart && date <= weekEnd)
-
     return date >= weekStart && date <= weekEnd
 }
 

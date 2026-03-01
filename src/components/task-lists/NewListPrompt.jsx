@@ -21,6 +21,7 @@ function NewListPrompt({setter}) {
                 onChange={(e) => setValue(e.target.value)}
                 id="newListName"
                 placeholder="New list name"
+                className="input"
             />
             <div className="btn-container">
                 <button onClick={() => setter(false)}>Cancel</button>

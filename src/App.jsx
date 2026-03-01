@@ -40,11 +40,17 @@ function App() {
                 getTodos, addTodo, removeTodo, settings,
                 setSettings, addList, getListNames
             }}>
-                <TaskNameList/>
-                <div>
-                    <Header/>
-                    <TodoInput/>
-                    <TodoList/>
+                <div className="flex justify-center bg-gray-900">
+                    <div className="flex gap-2 p-2">
+                        <aside className="w-48">
+                            <TaskNameList/>
+                        </aside>
+                        <main className="flex-1 flex flex-col items-center justify-start min-h-screen p-4 bg-gray-800 w-200">
+                                    <Header/>
+                                    <TodoInput/>
+                                    <TodoList/>
+                        </main>
+                    </div>
                 </div>
             </AppContext>
         </>
