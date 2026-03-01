@@ -23,9 +23,9 @@ function NewListPrompt({setter}) {
                 placeholder="New list name"
                 className="input"
             />
-            <div className="btn-container">
-                <button onClick={() => setter(false)}>Cancel</button>
-                <button onClick={() => addListOnClick()}>Add</button>
+            <div className="btn-container flex flex-row gap-2">
+                <button onClick={() => setter(false)} className="button">Cancel</button>
+                <button onClick={() => addListOnClick()} className="button">Add</button>
             </div>
         </>
     )

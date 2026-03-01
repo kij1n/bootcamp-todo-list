@@ -13,7 +13,7 @@ function TaskSettings({onClose, onSubmit}) {
     }
 
     return (
-        <>
+        <div className="flex flex-row gap-4 p-4 bg-gray-700 rounded">
             <input
                 type="date"
                 value={settings.date}
@@ -42,11 +42,11 @@ function TaskSettings({onClose, onSubmit}) {
                 <option value={Priority.HIGH}>High</option>
             </select>
 
-            <div>
-                <button onClick={onClose}>Cancel</button>
-                <button onClick={handleSubmit}>Done</button>
+            <div className="flex flex-row gap-2">
+                <button onClick={onClose} className="button">Cancel</button>
+                <button onClick={handleSubmit} className="button">Done</button>
             </div>
-        </>
+        </div>
     )
 }
 

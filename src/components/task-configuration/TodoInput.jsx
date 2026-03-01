@@ -44,7 +44,7 @@ function TodoInput() {
                     onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}
                 />
             ) : (
-                <>
+                <div className="flex flex-row gap-2 p-2 rounded">
                     <input
                         type="text"
                         id="newTask"
@@ -54,8 +54,8 @@ function TodoInput() {
                         onKeyDown={handleEnter}
                         className="input"
                     />
-                    <button onClick={() => setMoreSettings(true)}>More</button>
-                </>
+                    <button onClick={() => setMoreSettings(true)} className="button">More</button>
+                </div>
             )}
         </>
     );
