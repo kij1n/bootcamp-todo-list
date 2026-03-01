@@ -32,6 +32,7 @@ function App() {
     // TODO: remove filtering
     // TODO: add today, this week, later views
     // TODO: add completed tasks as a dropdown menu
+    // TODO: dates must be fixed do 00:00:00
 
     return (
         <>

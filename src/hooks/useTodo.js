@@ -20,7 +20,7 @@ function filterTasks(tasks, filter) {
     return tasks.filter(t => {
         switch (filter) {
             case ViewFilter.ALL: return true;
-            case ViewFilter.TODAY: return t.date.toDateString() === getToday().toDateString();
+            case ViewFilter.TODAY: return t.date <= getToday();
             case ViewFilter.THIS_WEEK: return sameWeek(t.date, getToday());
             case ViewFilter.LATER: return laterThanWeekDate(t.date, getToday());
             default: return true;

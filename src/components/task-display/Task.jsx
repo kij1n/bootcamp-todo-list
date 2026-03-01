@@ -36,7 +36,7 @@ function Task({task}) {
 
     return (
         <>
-            <li><button onClick={completeTask}>Done</button>{task.value} {task.date.toISOString()}</li>
+            <li><button onClick={completeTask}>Done</button>{task.value} {task.date.getDate() + "-" + (task.date.getMonth()+1) + "-" + task.date.getFullYear()}</li>
         </>
     )
 }
