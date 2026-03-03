@@ -9,9 +9,11 @@ function TodoList() {
 
     return (
         <>
-            <DisplaySettings />
+            <div className="overflow-visible">
+                <DisplaySettings />
+            </div>            
             {(tasks && tasks.length !== 0) && (
-                <ul>
+                <ul className="h-full mt-1 w-full overflow-scroll">
                     {tasks.map((task) => (
                         <Task task={task} key={task.id}/>
                     ))}

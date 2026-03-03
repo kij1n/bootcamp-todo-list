@@ -36,7 +36,15 @@ function Task({task}) {
 
     return (
         <>
-            <li><button onClick={completeTask}>Done</button>{task.value} {task.date.getDate() + "-" + (task.date.getMonth()+1) + "-" + task.date.getFullYear()}</li>
+            <li className="flex justify-between items-center gap-2 w-[calc(100%-1rem)] px-4 py-2 bg-gray-700 rounded-xl m-2">
+                <div className="flex items-center gap-2">
+                    <button onClick={completeTask}>Done</button>
+                    <span>{task.value}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <span></span>
+                </div>
+            </li>
         </>
     )
 }

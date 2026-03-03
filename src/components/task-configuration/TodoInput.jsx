@@ -27,11 +27,6 @@ function TodoInput() {
         }
     };
     const handleSettingsSubmit = (settingsData) => {
-        // const taskClone = structuredClone(taskValue)
-        // taskClone.date = new Date(settingsData.date)
-        // taskClone.date.setHours(0, 0, 0, 0)
-        // taskClone.repeat = settingsData.repeat
-        // taskClone.priority = settingsData.priority
         setTaskValue({
             date: new Date(settingsData.date).setHours(0, 0, 0, 0),
             repeat: settingsData.repeat,
