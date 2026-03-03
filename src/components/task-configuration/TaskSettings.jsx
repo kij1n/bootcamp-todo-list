@@ -13,7 +13,7 @@ function TaskSettings({onClose, onSubmit}) {
     }
 
     return (
-        <div id="test" className="flex flex-row justify-between gap-4 py-2 px-4 bg-gray-700 rounded-2xl w-[calc(100%_-_2.5rem)] self-center">
+        <div id="test" className="flex flex-row justify-between gap-4 py-2 px-4 bg-gray-700 rounded-2xl w-[calc(100%-2.5rem)] self-center">
             <div  className="flex flex-row gap-4 p-0">
                 <input
                     type="date"
