@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,7 +12,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color:oklch(21% 0.034 264.665);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,5 +26,8 @@
   }
   .button {
     @apply bg-cyan-800 hover:bg-cyan-950 text-white font-bold py-2 px-4 rounded;
+  }
+  .combo {
+    @apply block w-full text-white rounded-lg bg-gray-700 px-4 py-2 pr-1 focus:outline-none focus:ring-1 focus:ring-white sm:text-sm
   }
 }

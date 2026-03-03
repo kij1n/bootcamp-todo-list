@@ -5,7 +5,7 @@ function Header() {
     const {settings} = useContext(AppContext)
     return (
         <>
-            <h1>{settings.currentList}</h1>
+            <h1 className="text-3xl font-bold text-white p-4">{settings.currentList}</h1>
         </>
     )
 }

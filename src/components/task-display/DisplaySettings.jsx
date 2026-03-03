@@ -20,30 +20,34 @@ function DisplaySettings() {
     }
 
     return (
-        <>
-            <select
-            name='sorting'
-            id='select-sorting'
-            value={sorting}
-            onChange={handleSortingChange}
-            >
-                <option value={SortType.NONE}>None</option>
-                <option value={SortType.NAME}>Name</option>
-                <option value={SortType.DATE}>Date</option>
-                <option value={SortType.PRIORITY}>Priority</option>
-            </select>
-            <select
-                name="time-range"
-                id="select-time-range"
-                value={filter}
-                onChange={handleFilterChange}
-            >
-                <option value={ViewFilter.ALL}>All</option>
-                <option value={ViewFilter.TODAY}>Today</option>
-                <option value={ViewFilter.THIS_WEEK}>This week</option>
-                <option value={ViewFilter.LATER}>Later</option>
-            </select>
-        </>
+        <div className="flex flex-col items-start justify-start gap-4 p-4 bg-gray-800 rounded-2xl w-full">
+            <div className="flex flex-row gap-4 bg-gray-700 rounded-2xl pt-2 pb-2 pr-4 pl-4">
+                <select
+                name='sorting'
+                id='select-sorting'
+                value={sorting}
+                onChange={handleSortingChange}
+                className="combo"
+                >
+                    <option value={SortType.NONE}>None</option>
+                    <option value={SortType.NAME}>Name</option>
+                    <option value={SortType.DATE}>Date</option>
+                    <option value={SortType.PRIORITY}>Priority</option>
+                </select>
+                <select
+                    name="time-range"
+                    id="select-time-range"
+                    value={filter}
+                    onChange={handleFilterChange}
+                    className="combo"
+                >
+                    <option value={ViewFilter.ALL}>All</option>
+                    <option value={ViewFilter.TODAY}>Today</option>
+                    <option value={ViewFilter.THIS_WEEK}>This week</option>
+                    <option value={ViewFilter.LATER}>Later</option>
+                </select>
+            </div>
+        </div>
     )
 }
 

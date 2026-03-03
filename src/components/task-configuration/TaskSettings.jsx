@@ -13,7 +13,7 @@ function TaskSettings({onClose, onSubmit}) {
     }
 
     return (
-        <div className="flex flex-row gap-4 p-4 bg-gray-700 rounded">
+        <div className="flex flex-row gap-4 p-4 bg-gray-700 rounded-2xl pt-2 pb-2">
             <input
                 type="date"
                 value={settings.date}
@@ -24,6 +24,7 @@ function TaskSettings({onClose, onSubmit}) {
                 id="select-repeat"
                 value={settings.repeat}
                 onChange={(e) => setSettings({...settings, repeat: e.target.value})}
+                className="combo"
             >
                 <option value={RepeatType.NONE}>None</option>
                 <option value={RepeatType.DAILY}>Daily</option>
@@ -36,6 +37,7 @@ function TaskSettings({onClose, onSubmit}) {
                 id="priority-select"
                 value={settings.priority}
                 onChange={(e) => setSettings({...settings, priority: e.target.value})}
+                className="combo"
             >
                 <option value={Priority.LOW}>Low</option>
                 <option value={Priority.MEDIUM}>Medium</option>

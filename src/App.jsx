@@ -28,10 +28,7 @@ function App() {
         }
     )
 
-    // TODO: sorting with date an priority
-    // TODO: remove filtering
-    // TODO: add today, this week, later views
-    // TODO: add completed tasks as a dropdown menu
+    // TODO: add today, this week, later views !!! this week does not work
     // TODO: improve semantics
 
     return (
@@ -40,12 +37,12 @@ function App() {
                 getTodos, addTodo, removeTodo, settings,
                 setSettings, addList, getListNames
             }}>
-                <div className="flex justify-center bg-gray-900">
-                    <div className="flex gap-2 p-2">
+                <div className="flex justify-center bg-gray-900 h-screen">
+                    <div className="flex flex-row gap-2 h-full pt-10 pb-10">
                         <aside className="w-48">
                             <TaskNameList/>
                         </aside>
-                        <main className="flex-1 flex flex-col items-start justify-start min-h-screen p-4 bg-gray-800 w-200 rounded-2xl">
+                        <main className="flex-1 flex flex-col items-start justify-start bg-gray-800 w-200 rounded-2xl">
                                     <Header/>
                                     <TodoInput/>
                                     <TodoList/>
