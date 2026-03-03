@@ -13,38 +13,39 @@ function TaskSettings({onClose, onSubmit}) {
     }
 
     return (
-        <div className="flex flex-row gap-4 p-4 bg-gray-700 rounded-2xl pt-2 pb-2">
-            <input
-                type="date"
-                value={settings.date}
-                onChange={(e) => setSettings({...settings, date: e.target.value})}
-            />
-            <select
-                name="repeat"
-                id="select-repeat"
-                value={settings.repeat}
-                onChange={(e) => setSettings({...settings, repeat: e.target.value})}
-                className="combo"
-            >
-                <option value={RepeatType.NONE}>None</option>
-                <option value={RepeatType.DAILY}>Daily</option>
-                <option value={RepeatType.WEEKLY}>Weekly</option>
-                <option value={RepeatType.MONTHLY}>Monthly</option>
-                <option value={RepeatType.YEARLY}>Yearly</option>
-            </select>
-            <select
-                name="priority"
-                id="priority-select"
-                value={settings.priority}
-                onChange={(e) => setSettings({...settings, priority: e.target.value})}
-                className="combo"
-            >
-                <option value={Priority.LOW}>Low</option>
-                <option value={Priority.MEDIUM}>Medium</option>
-                <option value={Priority.HIGH}>High</option>
-            </select>
-
-            <div className="flex flex-row gap-2">
+        <div id="test" className="flex flex-row justify-between gap-4 py-2 px-4 bg-gray-700 rounded-2xl w-[calc(100%_-_2.5rem)] self-center">
+            <div  className="flex flex-row gap-4 p-0">
+                <input
+                    type="date"
+                    value={settings.date}
+                    onChange={(e) => setSettings({...settings, date: e.target.value})}
+                />
+                <select
+                    name="repeat"
+                    id="select-repeat"
+                    value={settings.repeat}
+                    onChange={(e) => setSettings({...settings, repeat: e.target.value})}
+                    className="combo"
+                >
+                    <option value={RepeatType.NONE}>None</option>
+                    <option value={RepeatType.DAILY}>Daily</option>
+                    <option value={RepeatType.WEEKLY}>Weekly</option>
+                    <option value={RepeatType.MONTHLY}>Monthly</option>
+                    <option value={RepeatType.YEARLY}>Yearly</option>
+                </select>
+                <select
+                    name="priority"
+                    id="priority-select"
+                    value={settings.priority}
+                    onChange={(e) => setSettings({...settings, priority: e.target.value})}
+                    className="combo"
+                >
+                    <option value={Priority.LOW}>Low</option>
+                    <option value={Priority.MEDIUM}>Medium</option>
+                    <option value={Priority.HIGH}>High</option>
+                </select>
+            </div>
+            <div className="flex flex-row gap-2 p-0">
                 <button onClick={onClose} className="button">Cancel</button>
                 <button onClick={handleSubmit} className="button">Done</button>
             </div>

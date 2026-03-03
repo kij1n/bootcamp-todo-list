@@ -27,12 +27,16 @@ function TodoInput() {
         }
     };
     const handleSettingsSubmit = (settingsData) => {
-        const taskClone = structuredClone(taskValue)
-        taskClone.date = new Date(settingsData.date)
-        taskClone.date.setHours(0, 0, 0, 0)
-        taskClone.repeat = settingsData.repeat
-        taskClone.priority = settingsData.priority
-        setTaskValue(taskClone)
+        // const taskClone = structuredClone(taskValue)
+        // taskClone.date = new Date(settingsData.date)
+        // taskClone.date.setHours(0, 0, 0, 0)
+        // taskClone.repeat = settingsData.repeat
+        // taskClone.priority = settingsData.priority
+        setTaskValue({
+            date: new Date(settingsData.date).setHours(0, 0, 0, 0),
+            repeat: settingsData.repeat,
+            priority: settingsData.priority
+        })
         setMoreSettings(false)
     };
 
@@ -44,7 +48,7 @@ function TodoInput() {
                     onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}
                 />
             ) : (
-                <div className="flex flex-row gap-2 p-2 rounded">
+                <div className="flex flex-row gap-2 py-2 px-3 rounded w-full">
                     <input
                         type="text"
                         id="newTask"
@@ -52,7 +56,7 @@ function TodoInput() {
                         onChange={(e) => setTaskValue((prev) => ({...prev, value: e.target.value}))}
                         placeholder="Add a new task"
                         onKeyDown={handleEnter}
-                        className="input"
+                        className="input w-full"
                     />
                     <button onClick={() => setMoreSettings(true)} className="button">More</button>
                 </div>
