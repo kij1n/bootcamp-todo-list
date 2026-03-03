@@ -2,6 +2,23 @@ import {RepeatType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 import {useContext} from "react";
 
+function prettyDate(date) {
+    return date.toLocaleDateString("en-EU", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    })
+}
+
+function btnColorStr(priority) {
+    switch (priority) {
+        case "HIGH": return "bg-red-500 hover:bg-red-700";
+        case "MEDIUM": return "bg-yellow-500 hover:bg-yellow-700";
+        case "LOW": return "bg-green-500 hover:bg-green-700";
+        default: return "bg-gray-500 hover:bg-gray-700";
+    }
+}
+
 function getNewTask(task) {
     const newTask = structuredClone(task)
     switch (task.repeat) {
@@ -38,11 +55,14 @@ function Task({task}) {
         <>
             <li className="flex justify-between items-center gap-2 w-[calc(100%-1rem)] px-4 py-2 bg-gray-700 rounded-xl m-2">
                 <div className="flex items-center gap-2">
-                    <button onClick={completeTask}>Done</button>
+                    <button onClick={completeTask} className={`task-button ${btnColorStr(task.priority)}`}>
+                        Done
+                    </button>
                     <span>{task.value}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <span></span>
+                <div className="flex items-center gap-5">
+                    <span className="text-gray-500">{task.repeat}</span>
+                    <span className="text-gray-400">{prettyDate(task.date)}</span>
                 </div>
             </li>
         </>

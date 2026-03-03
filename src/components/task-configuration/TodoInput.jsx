@@ -43,7 +43,7 @@ function TodoInput() {
                     onSubmit={(settingsData) => handleSettingsSubmit(settingsData)}
                 />
             ) : (
-                <div className="flex flex-row gap-2 py-2 px-3 rounded w-full">
+                <div className="flex flex-row gap-2 py-2 px-3 rounded w-full shrink-0">
                     <input
                         type="text"
                         id="newTask"

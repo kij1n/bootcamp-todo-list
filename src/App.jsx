@@ -42,10 +42,14 @@ function App() {
                         <aside className="w-48">
                             <TaskNameList/>
                         </aside>
-                        <main className="flex-1 flex flex-col items-start justify-start bg-gray-800 w-200 rounded-2xl">
-                                    <Header/>
-                                    <TodoInput/>
-                                    <TodoList/>
+                        <main className="flex-1 flex flex-col items-start justify-start bg-gray-800 w-200 rounded-2xl overflow-hidden">
+                            <div className="shrink-0 w-full flex flex-col">
+                                <Header/>
+                                <TodoInput/>
+                            </div>
+                            <div className="flex-1 w-full min-h-0 flex flex-col">
+                                <TodoList/>
+                            </div>
                         </main>
                     </div>
                 </div>
