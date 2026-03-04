@@ -15,11 +15,13 @@ function TaskSettings({onClose, onSubmit}) {
     return (
         <div id="test" className="flex flex-row justify-between gap-4 py-2 px-4 bg-gray-700 rounded-2xl w-[calc(100%-2.5rem)] self-center">
             <div  className="flex flex-row gap-4 p-0">
+                <label htmlFor="date" className="sr-only">Due date</label>
                 <input
                     type="date"
                     value={settings.date}
                     onChange={(e) => setSettings({...settings, date: new Date(e.target.value)})}
                 />
+                <label htmlFor="select-repeat" className="sr-only">Repeat</label>
                 <select
                     name="repeat"
                     id="select-repeat"
@@ -33,6 +35,7 @@ function TaskSettings({onClose, onSubmit}) {
                     <option value={RepeatType.MONTHLY}>Monthly</option>
                     <option value={RepeatType.YEARLY}>Yearly</option>
                 </select>
+                <label htmlFor="priority-select" className="sr-only">Priority</label>
                 <select
                     name="priority"
                     id="priority-select"

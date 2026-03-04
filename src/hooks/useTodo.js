@@ -61,22 +61,29 @@ function useTodo() {
     ) => {
         return filterTasks(sortTasks(todos, sortingType, listName), filter)
     }
+    
     const addTodo = (task, listName) => {
         task = {...task, id: crypto.randomUUID()}
         setTodos(prev => ({
             ...prev, [listName]: [...prev[listName], task]
         }))
     }
+
     const removeTodo = (id, listName) => {
         setTodos(prev => ({
             ...prev, [listName]: prev[listName].filter(t => t.id !== id)
         }))
     }
+
     const addList = (listName) => {
+        if (todos?.[listName]) {
+            return
+        }
         setTodos({
             ...todos, [listName]: []
         })
     }
+
     const delList = (listName) => {
         setTodos((prev) => ({
             ...Object.fromEntries(Object.entries(prev).filter(([key, val]) => key !== listName))

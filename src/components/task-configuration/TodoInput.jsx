@@ -49,6 +49,7 @@ function TodoInput() {
                 />
             ) : (
                 <div className="flex flex-row gap-2 py-2 px-3 rounded w-full shrink-0">
+                    <label htmlFor="newTask" className="sr-only">New task</label>
                     <input
                         type="text"
                         id="newTask"

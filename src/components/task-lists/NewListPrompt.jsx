@@ -15,6 +15,7 @@ function NewListPrompt({setter}) {
 
     return (
         <>
+            <label htmlFor="newListName" className="sr-only">New list name</label>
             <input
                 type="text"
                 value={value}

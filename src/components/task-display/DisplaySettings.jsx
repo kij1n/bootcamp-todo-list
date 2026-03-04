@@ -22,6 +22,7 @@ function DisplaySettings() {
     return (
         <div className="flex flex-col items-start justify-start gap-4 p-4 bg-gray-800 rounded-2xl w-full">
             <div className="flex flex-row gap-4 bg-gray-700 rounded-2xl px-4 py-2 w-[35%]">
+                <label htmlFor="select-sorting" className="sr-only">Sorting</label>
                 <select
                 name='sorting'
                 id='select-sorting'
@@ -34,6 +35,7 @@ function DisplaySettings() {
                     <option value={SortType.DATE}>Date</option>
                     <option value={SortType.PRIORITY}>Priority</option>
                 </select>
+                <label htmlFor="select-time-range" className="sr-only">Time range</label>
                 <select
                     name="time-range"
                     id="select-time-range"

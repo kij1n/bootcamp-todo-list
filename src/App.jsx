@@ -28,9 +28,6 @@ function App() {
         }
     )
 
-    // TODO: add today, this week, later views !!! this week does not work
-    // TODO: improve semantics
-
     return (
         <>
             <AppContext value={{

@@ -17,7 +17,7 @@ export function sameWeek(date, today) {
         const weekStart = new Date(today)
         weekStart.setDate(weekStart.getDate() - weekStart.getDay())
         const weekEnd = new Date(weekStart)
-        weekEnd.setDate(weekEnd.getDate() + 7)
+        weekEnd.setDate(weekEnd.getDate() + 6)
         return [weekStart, weekEnd]
     })()
     return date >= weekStart && date <= weekEnd
