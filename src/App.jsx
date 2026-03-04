@@ -30,7 +30,6 @@ function App() {
 
     // TODO: add today, this week, later views !!! this week does not work
     // TODO: improve semantics
-    // TODO: tasks cannot be removed!!!
 
     return (
         <>

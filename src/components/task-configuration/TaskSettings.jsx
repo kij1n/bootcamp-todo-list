@@ -5,7 +5,7 @@ function TaskSettings({onClose, onSubmit}) {
     const [settings, setSettings] = useState({
         date: new Date(),
         repeat: RepeatType.NONE,
-        priority: Priority.NONE
+        priority: Priority.LOW
     })
 
     const handleSubmit = () => {
@@ -37,9 +37,10 @@ function TaskSettings({onClose, onSubmit}) {
                     name="priority"
                     id="priority-select"
                     value={settings.priority}
-                    onChange={(e) => setSettings({...settings, priority: e.target.value})}
+                    onChange={(e) => setSettings({...settings, priority: Number(e.target.value)})}
                     className="combo"
                 >
+                    {/* <option value={Priority.NONE}>None</option> */}
                     <option value={Priority.LOW}>Low</option>
                     <option value={Priority.MEDIUM}>Medium</option>
                     <option value={Priority.HIGH}>High</option>

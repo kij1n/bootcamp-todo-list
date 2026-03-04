@@ -8,13 +8,11 @@ function TodoInput() {
     const {addTodo, settings} = useContext(AppContext)
 
     const [moreSettings, setMoreSettings] = useState(false);
-    const [taskValue, setTaskValue] = useState(() => {
-        return {
-            value: "",
-            date: getToday(),
-            repeat: RepeatType.NONE,
-            priority: Priority.NONE
-        }
+    const [taskValue, setTaskValue] = useState({
+        value: "",
+        date: getToday(),
+        repeat: RepeatType.NONE,
+        priority: Priority.LOW
     })
 
     const handleEnter = (event) => {
@@ -24,7 +22,7 @@ function TodoInput() {
                 value: "",
                 date: getToday(),
                 repeat: RepeatType.NONE,
-                priority: Priority.NONE
+                priority: Priority.LOW
             })
         }
     };
@@ -35,7 +33,7 @@ function TodoInput() {
             ...taskValue,
             date,
             repeat: settingsData.repeat ?? RepeatType.NONE,
-            priority: settingsData.priority ?? Priority.NONE
+            priority: settingsData.priority ?? Priority.LOW
         })
         console.log(settingsData)
         console.log(taskValue)

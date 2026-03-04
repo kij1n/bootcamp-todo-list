@@ -21,7 +21,7 @@ function DisplaySettings() {
 
     return (
         <div className="flex flex-col items-start justify-start gap-4 p-4 bg-gray-800 rounded-2xl w-full">
-            <div className="flex flex-row gap-4 bg-gray-700 rounded-2xl px-4 py-2">
+            <div className="flex flex-row gap-4 bg-gray-700 rounded-2xl px-4 py-2 w-[35%]">
                 <select
                 name='sorting'
                 id='select-sorting'

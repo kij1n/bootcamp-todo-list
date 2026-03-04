@@ -12,6 +12,7 @@ function prettyDate(date) {
 }
 
 function btnColorStr(priority) {
+    console.log(priority)
     switch (priority) {
         case Priority.HIGH: return "bg-red-500 hover:bg-red-700";
         case Priority.MEDIUM: return "bg-yellow-500 hover:bg-yellow-700";
