@@ -15,7 +15,7 @@ function App() {
         addIfEmpty()
     }, [])
 
-    const [getTodos, addTodo, removeTodo, addList, getListNames] = useTodo()
+    const [getTodos, addTodo, removeTodo, addList, getListNames, delList] = useTodo()
     const [settings, setSettings] = useLocalStorage(
         "settings",
         {},
@@ -35,12 +35,12 @@ function App() {
         <>
             <AppContext value={{
                 getTodos, addTodo, removeTodo, settings,
-                setSettings, addList, getListNames
+                setSettings, addList, getListNames, delList
             }}>
                 <div className="flex justify-center bg-gray-900 h-screen">
                     <div className="flex flex-row gap-2 h-full pt-10 pb-10">
                         <aside className="w-48">
-                            <TaskNameList/>
+                            <TaskNameList/> 
                         </aside>
                         <main className="flex-1 flex flex-col items-start justify-start bg-gray-800 w-200 rounded-2xl overflow-hidden">
                             <div className="shrink-0 w-full flex flex-col">

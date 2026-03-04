@@ -3,15 +3,23 @@ import NewListPrompt from "./NewListPrompt.jsx";
 import {AppContext} from "../../utils/AppContext.js";
 
 
+
 function TaskNameList() {
     const [newList, setNewList] = useState(false)
-    const {getListNames, settings, setSettings} = useContext(AppContext)
+    const {getListNames, delList, settings, setSettings} = useContext(AppContext)
 
     const availableLists = getListNames()
     const currentList = settings?.currentList ?? "index"
 
     const setCurrentList = (newListName) => {
         setSettings((prev) => ({...prev, currentList: newListName}))
+    }
+
+    const deleteList = (listName) => {
+        delList(listName)
+        if (currentList === listName) {
+            setCurrentList("")
+        }
     }
 
     return (
@@ -30,12 +38,15 @@ function TaskNameList() {
             <ul className="display-content w-full flex flex-col gap-2">
                 {availableLists && availableLists.length > 0 && (
                     availableLists.map((listName) => (
-                        <li key={listName}>
+                        <li key={listName} className="flex flex-row justify-between w-full">
                             <button 
                                 onClick={() => setCurrentList(listName)}
-                                className={` hover:bg-slate-500 text-white py-2 px-4 rounded w-full text-left ${listName === currentList ? "bg-slate-600 font-bold" : "bg-slate-700"}`}
+                                className={`hover:bg-slate-500 text-white py-2 px-4 rounded w-full text-left ${listName === currentList ? "bg-slate-600 font-bold" : "bg-slate-700"}`}
                             >
                                 {listName}
+                            </button>
+                            <button className="del-button" onClick={() => deleteList(listName)}>
+                                del
                             </button>
                         </li>
                     ))

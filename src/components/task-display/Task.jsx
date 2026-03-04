@@ -12,7 +12,6 @@ function prettyDate(date) {
 }
 
 function btnColorStr(priority) {
-    console.log(priority)
     switch (priority) {
         case Priority.HIGH: return "bg-red-500 hover:bg-red-700";
         case Priority.MEDIUM: return "bg-yellow-500 hover:bg-yellow-700";
@@ -48,7 +47,7 @@ function Task({task}) {
 
     const completeTask = () => {
         removeTodo(task.id, settings.currentList)
-        console.log("removed task with id: " + task.id)
+        console.log("remove d task with id: " + task.id)
         if (task.repeat !== RepeatType.NONE) {
             addTodo(getNewTask(task), settings.currentList)
         }

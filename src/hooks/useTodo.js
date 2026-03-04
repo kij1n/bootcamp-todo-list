@@ -77,8 +77,13 @@ function useTodo() {
             ...todos, [listName]: []
         })
     }
+    const delList = (listName) => {
+        setTodos((prev) => ({
+            ...Object.fromEntries(Object.entries(prev).filter(([key, val]) => key !== listName))
+        }))
+    }
 
-    return [getTodos, addTodo, removeTodo, addList, getListNames]
+    return [getTodos, addTodo, removeTodo, addList, getListNames, delList]
 }
 
 export default useTodo;
