@@ -18,7 +18,7 @@ function TaskSettings({onClose, onSubmit}) {
                 <input
                     type="date"
                     value={settings.date}
-                    onChange={(e) => setSettings({...settings, date: e.target.value})}
+                    onChange={(e) => setSettings({...settings, date: new Date(e.target.value)})}
                 />
                 <select
                     name="repeat"

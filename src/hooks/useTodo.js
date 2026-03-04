@@ -62,15 +62,15 @@ function useTodo() {
         return filterTasks(sortTasks(todos, sortingType, listName), filter)
     }
     const addTodo = (task, listName) => {
-        task = {...task, id: Date.now().toString()}
-        setTodos({
-            ...todos, [listName]: [...todos[listName], task]
-        })
+        task = {...task, id: crypto.randomUUID()}
+        setTodos(prev => ({
+            ...prev, [listName]: [...prev[listName], task]
+        }))
     }
     const removeTodo = (id, listName) => {
-        setTodos({
-            ...todos, [listName]: todos[listName].filter(t => t.id !== id)
-        })
+        setTodos(prev => ({
+            ...prev, [listName]: prev[listName].filter(t => t.id !== id)
+        }))
     }
     const addList = (listName) => {
         setTodos({

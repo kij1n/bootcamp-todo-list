@@ -1,6 +1,6 @@
 import TaskSettings from "./TaskSettings.jsx";
 import {useContext, useState} from "react";
-import {RepeatType} from "../../utils/enums.js";
+import {RepeatType, Priority} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 import {getToday} from "../../utils/functions.js";
 
@@ -12,7 +12,8 @@ function TodoInput() {
         return {
             value: "",
             date: getToday(),
-            repeat: RepeatType.NONE
+            repeat: RepeatType.NONE,
+            priority: Priority.NONE
         }
     })
 
@@ -22,16 +23,22 @@ function TodoInput() {
             setTaskValue({
                 value: "",
                 date: getToday(),
-                repeat: RepeatType.NONE
+                repeat: RepeatType.NONE,
+                priority: Priority.NONE
             })
         }
     };
     const handleSettingsSubmit = (settingsData) => {
+        const date = settingsData.date ?? getToday();
+        date.setHours(0, 0, 0, 0);
         setTaskValue({
-            date: new Date(settingsData.date).setHours(0, 0, 0, 0),
-            repeat: settingsData.repeat,
-            priority: settingsData.priority
+            ...taskValue,
+            date,
+            repeat: settingsData.repeat ?? RepeatType.NONE,
+            priority: settingsData.priority ?? Priority.NONE
         })
+        console.log(settingsData)
+        console.log(taskValue)
         setMoreSettings(false)
     };
 

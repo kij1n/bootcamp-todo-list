@@ -1,6 +1,7 @@
 import {RepeatType} from "../../utils/enums.js";
 import {AppContext} from "../../utils/AppContext.js";
 import {useContext} from "react";
+import {Priority} from "../../utils/enums.js";
 
 function prettyDate(date) {
     return date.toLocaleDateString("en-EU", {
@@ -12,9 +13,9 @@ function prettyDate(date) {
 
 function btnColorStr(priority) {
     switch (priority) {
-        case "HIGH": return "bg-red-500 hover:bg-red-700";
-        case "MEDIUM": return "bg-yellow-500 hover:bg-yellow-700";
-        case "LOW": return "bg-green-500 hover:bg-green-700";
+        case Priority.HIGH: return "bg-red-500 hover:bg-red-700";
+        case Priority.MEDIUM: return "bg-yellow-500 hover:bg-yellow-700";
+        case Priority.LOW: return "bg-green-500 hover:bg-green-700";
         default: return "bg-gray-500 hover:bg-gray-700";
     }
 }
@@ -46,6 +47,7 @@ function Task({task}) {
 
     const completeTask = () => {
         removeTodo(task.id, settings.currentList)
+        console.log("removed task with id: " + task.id)
         if (task.repeat !== RepeatType.NONE) {
             addTodo(getNewTask(task), settings.currentList)
         }
