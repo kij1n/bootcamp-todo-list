@@ -65,6 +65,7 @@ function Task({task}) {
                 <div className="flex items-center gap-5">
                     <span className="text-gray-500">{task.repeat}</span>
                     <span className="text-gray-400">{prettyDate(task.date)}</span>
+                    <button onClick={() => removeTodo(task.id, settings.currentList)} className="del-button">del</button>
                 </div>
             </li>
         </>

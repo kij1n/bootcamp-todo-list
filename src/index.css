@@ -32,4 +32,7 @@
   .task-button {
     @apply text-white font-bold py-0 px-2 rounded;
   }
+  .del-button {
+    @apply text-white font-bold py-0 px-2 rounded bg-red-700 hover:bg-red-900;
+  }
 }
